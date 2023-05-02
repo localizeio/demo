@@ -1,0 +1,21 @@
+.cont {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 16px;
+}
+.file {
+    display: none;
+}
+.fileReaderButton {
+    color: #8a7a42;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -.190555602312088px;
+    line-height: 21px;
+    text-align: left;
+}
+.fileName {
+    margin-left: 16px;
+}
