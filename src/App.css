@@ -1,1 +1,18 @@
 
+.header {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+}
+.switch {
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.editors__container {
+    display: flex;
+}
