@@ -1,24 +1,32 @@
-import './App.css';
-import {Editor} from 'editor';
+import {useState} from "react";
+import {Editor} from '@localizeio/editor';
 import {testedData} from "./helpers/resultData";
 import FileLoader from "./components/FileLoader";
-import {useState} from "react";
 import CheckBoxSwitch from "./components/CheckBoxSwitch";
 import MarkdownView from "./components/MarkdownView";
+
+import './App.css';
 
 function App() {
     const {segments, metaData, layout} = testedData
 
     const [isDevMode, setIsDevMode] = useState(false)
+    const [isAllowSourceEdit, setIsAllowSourceEdit] = useState(false)
+
     const [markDown, setMarkDown] = useState(null)
-    const [segmentsTest, setSegmentsTest] = useState(segments)
+
+    const [sourceSegments, setSourceSegments] = useState(segments)
+    const [targetSegments, setTargetSegments] = useState(segments)
 
     const onFileLoad = (file) => {
         setMarkDown({source: file.fileText, target: null})
     }
 
-    const onSegmentChange = (changedSegment, callback) => {
-        const changedSegments = segmentsTest.map((segment) => {
+    const onSegmentChange = (changedSegment, editableSegmentType, callback) => {
+        const segmentState = editableSegmentType === 'target' ? targetSegments : sourceSegments
+        const setSegmentState = editableSegmentType === 'target' ? setTargetSegments : setSourceSegments
+
+        const changedSegments = segmentState.map((segment) => {
             if (changedSegment.id === segment.id) {
                 callback('success', changedSegment)
                 return changedSegment
@@ -26,7 +34,7 @@ function App() {
                 return segment
             }
         })
-        setSegmentsTest((prevState) => {
+        setSegmentState((prevState) => {
             return changedSegments
         })
     }
@@ -35,14 +43,25 @@ function App() {
     <div className="App">
         <header className='header'>
             <FileLoader onFileLoad={onFileLoad}/>
-            <div className='switch'>
-                <span>Dev Mode</span>
-                <CheckBoxSwitch isChecked={isDevMode}
-                                onHandleChange={() => setIsDevMode(!isDevMode)}/>
+            <div className='control'>
+                <div className='switch'>
+                    <span className='switch__title'>Allow edit source</span>
+                    <CheckBoxSwitch isChecked={isAllowSourceEdit}
+                                    onHandleChange={() => setIsAllowSourceEdit(!isAllowSourceEdit)}/>
+
+                </div>
+                <div className='switch'>
+                    <span className='switch__title'>Dev Mode</span>
+                    <CheckBoxSwitch isChecked={isDevMode}
+                                    onHandleChange={() => setIsDevMode(!isDevMode)}/>
+                </div>
             </div>
         </header>
 
-        <Editor data={{metaData, layout, segments: segmentsTest}}
+        <Editor segments={{target: targetSegments, source: sourceSegments}}
+                layout={layout}
+                metaData={metaData}
+                isAllowSourceEdit={isAllowSourceEdit}
                 onSegmentChange={onSegmentChange}/>
 
         {isDevMode && <MarkdownView mdData={markDown} />}
