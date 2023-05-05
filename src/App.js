@@ -1,24 +1,24 @@
 import './App.css';
-import {Editor} from '@localizeio/editor';
+import {Editor} from 'editor';
 import {testedData} from "./helpers/resultData";
 import FileLoader from "./components/FileLoader";
 import {useState} from "react";
 import CheckBoxSwitch from "./components/CheckBoxSwitch";
+import MarkdownView from "./components/MarkdownView";
 
 function App() {
-    const [isDevMode, setIsDevMode] = useState(false)
-
     const {segments, metaData, layout} = testedData
 
-    const [segmentsTestOne, setSegmentsTestOne] = useState(segments)
-    const [segmentsTestTwo, setSegmentsTestTwo] = useState(segments)
+    const [isDevMode, setIsDevMode] = useState(false)
+    const [markDown, setMarkDown] = useState(null)
+    const [segmentsTest, setSegmentsTest] = useState(segments)
 
     const onFileLoad = (file) => {
-        console.log(file)
+        setMarkDown({source: file.fileText, target: null})
     }
 
-    const findAndChangeSegment = (changedSegment, callback, state, setState) => {
-        const changedSegments = state.map((segment) => {
+    const onSegmentChange = (changedSegment, callback) => {
+        const changedSegments = segmentsTest.map((segment) => {
             if (changedSegment.id === segment.id) {
                 callback('success', changedSegment)
                 return changedSegment
@@ -26,16 +26,9 @@ function App() {
                 return segment
             }
         })
-        setState((prevState) => {
+        setSegmentsTest((prevState) => {
             return changedSegments
         })
-    }
-
-    const onSegmentChangeOne = (changedSegment, callback) => {
-        findAndChangeSegment(changedSegment, callback, segmentsTestOne, setSegmentsTestOne)
-    }
-    const onSegmentChangeTwo = (changedSegment, callback) => {
-        findAndChangeSegment(changedSegment, callback, segmentsTestTwo, setSegmentsTestTwo)
     }
 
     return (
@@ -48,16 +41,11 @@ function App() {
                                 onHandleChange={() => setIsDevMode(!isDevMode)}/>
             </div>
         </header>
-        <div className='editors__container'>
-            <Editor data={{metaData, layout, segments: segmentsTestOne}}
-                    title='EDITOR 1'
-                    onSegmentChange={onSegmentChangeOne}
-                    isDevMode={isDevMode}/>
-            {isDevMode && <Editor data={{metaData, layout, segments: segmentsTestTwo}}
-                                  title='EDITOR 2'
-                                  onSegmentChange={onSegmentChangeTwo}
-                                  isDevMode={isDevMode}/>}
-        </div>
+
+        <Editor data={{metaData, layout, segments: segmentsTest}}
+                onSegmentChange={onSegmentChange}/>
+
+        {isDevMode && <MarkdownView mdData={markDown} />}
     </div>
   );
 }

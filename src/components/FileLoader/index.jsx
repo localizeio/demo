@@ -19,19 +19,18 @@ const FileLoader= ({onFileLoad}) => {
         })
     }
 
-    useEffect(() => {
-        fileState && onFileLoad(fileState)
-    }, [fileState, onFileLoad])
 
     const onInputFileChange = async (e) => {
         e.preventDefault()
         const targetFile = e.target.files[0]
 
         onFileLoadAsync(targetFile).then((text) => {
-            setFileState({
+            const result = {
                 file: targetFile,
                 fileText: text
-            })
+            }
+            setFileState(result)
+            onFileLoad(result)
         })
     }
 
