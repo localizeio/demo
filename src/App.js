@@ -18,9 +18,9 @@ function App() {
 
     const [markDown, setMarkDown] = useState(null)
 
-    const [layoutData, setLayoutData] = useState(layout)
-    const [sourceSegments, setSourceSegments] = useState(segments)
-    const [targetSegments, setTargetSegments] = useState(segments)
+    const [layoutData, setLayoutData] = useState(null)
+    const [sourceSegments, setSourceSegments] = useState(null)
+    const [targetSegments, setTargetSegments] = useState(null)
 
     const onFileLoad = (file) => {
         setMarkDown({source: file.fileText, target: null})
