@@ -359,7 +359,91 @@ const layout = {
             properties: {},
             tagName: 'table',
             type: 'element',
-        },
+        }, {
+            children: [
+                {
+                    children: [
+                        {
+                            children: [
+                                {
+                                    children: [
+                                        {type: 'segment', id: '34'},
+                                    ],
+                                    properties: {},
+                                    tagName: 'td',
+                                    type: 'element',
+                                }, {
+                                    children: [
+                                        {
+                                            children: [
+                                                {
+                                                    children: [
+                                                        {
+                                                            children: [
+                                                                {type: 'segment', id: '35'}
+                                                            ],
+                                                            properties: {},
+                                                            tagName: 'td',
+                                                            type: 'element',
+                                                        }, {
+                                                            children: [
+                                                                {type: 'segment', id: '36'}
+                                                            ],
+                                                            properties: {},
+                                                            tagName: 'td',
+                                                            type: 'element',
+                                                        }
+                                                    ],
+                                                    properties: {},
+                                                    tagName: 'tr',
+                                                    type: 'element',
+                                                },  {
+                                                    children: [
+                                                        {
+                                                            children: [
+                                                                {type: 'segment', id: '37'}
+                                                            ],
+                                                            properties: {},
+                                                            tagName: 'td',
+                                                            type: 'element',
+                                                        }, {
+                                                            children: [
+                                                                {type: 'segment', id: '38'}
+                                                            ],
+                                                            properties: {},
+                                                            tagName: 'td',
+                                                            type: 'element',
+                                                        }
+                                                    ],
+                                                    properties: {},
+                                                    tagName: 'tr',
+                                                    type: 'element',
+                                                }
+                                            ],
+                                            properties: {},
+                                            tagName: 'tbody',
+                                            type: 'element',
+                                        }
+                                    ],
+                                    properties: {},
+                                    tagName: 'td',
+                                    type: 'element',
+                                }
+                            ],
+                            properties: {},
+                            tagName: 'tr',
+                            type: 'element',
+                        }
+                    ],
+                    properties: {},
+                    tagName: 'tbody',
+                    type: 'element',
+                }
+            ],
+            properties: {},
+            tagName: 'table',
+            type: 'element',
+        }
     ]
 }
 
@@ -516,6 +600,26 @@ const segments = [
     {
         id: '33',
         text: 'Text',
+    },
+    {
+        id: '34',
+        text: 'Girl',
+    },
+    {
+        id: '35',
+        text: 'name',
+    },
+    {
+        id: '36',
+        text: 'Kate2',
+    },
+    {
+        id: '37',
+        text: 'profession',
+    },
+    {
+        id: '38',
+        text: 'Interprète',
     },
 ]
 

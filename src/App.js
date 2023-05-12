@@ -1,11 +1,14 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Editor} from '@localizeio/editor';
 import {testedData} from "./helpers/resultData";
+import MdProcessor from "@localizeio/md/dist/src/processor";
 import FileLoader from "./components/FileLoader";
 import CheckBoxSwitch from "./components/CheckBoxSwitch";
 import MarkdownView from "./components/MarkdownView";
 
 import './App.css';
+
+const processor =  new MdProcessor()
 
 function App() {
     const {segments, metaData, layout} = testedData
@@ -15,12 +18,22 @@ function App() {
 
     const [markDown, setMarkDown] = useState(null)
 
+    const [layoutData, setLayoutData] = useState(layout)
     const [sourceSegments, setSourceSegments] = useState(segments)
     const [targetSegments, setTargetSegments] = useState(segments)
 
     const onFileLoad = (file) => {
         setMarkDown({source: file.fileText, target: null})
     }
+
+    useEffect(() => {
+        if(markDown?.source) {
+            const result = processor.parse(markDown.source)
+            setSourceSegments(result.segments)
+            setTargetSegments(result.segments)
+            setLayoutData(result.layout)
+        }
+    }, [markDown])
 
     const onSegmentChange = (changedSegment, editableSegmentType, callback) => {
         const segmentState = editableSegmentType === 'target' ? targetSegments : sourceSegments
@@ -59,7 +72,7 @@ function App() {
         </header>
 
         <Editor segments={{target: targetSegments, source: sourceSegments}}
-                layout={layout}
+                layout={layoutData}
                 metaData={metaData}
                 isAllowSourceEdit={isAllowSourceEdit}
                 onSegmentChange={onSegmentChange}/>
