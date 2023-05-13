@@ -11,7 +11,7 @@ import './App.css';
 const processor =  new MdProcessor()
 
 function App() {
-    const {segments, metaData, layout} = testedData
+    const {metaData} = testedData
 
     const [isDevMode, setIsDevMode] = useState(false)
     const [isAllowSourceEdit, setIsAllowSourceEdit] = useState(false)

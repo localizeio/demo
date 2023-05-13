@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useRef, useState} from 'react';
 import cl from './FileLoader.module.css';
 
 const FileLoader= ({onFileLoad}) => {
