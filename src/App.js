@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Editor} from 'editor';
+import {Editor} from '@localizeio/editor';
 import {testedData} from "./helpers/resultData";
 import MdProcessor from "@localizeio/md/dist/src/processor";
 import FileLoader from "./components/FileLoader";
