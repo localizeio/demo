@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {Editor} from '@localizeio/editor';
+import {useState} from "react";
+import {Editor} from 'editor';
 import {testedData} from "./helpers/resultData";
 import MdProcessor from "@localizeio/md/dist/src/processor";
 import FileLoader from "./components/FileLoader";
@@ -24,16 +24,24 @@ function App() {
 
     const onFileLoad = (file) => {
         setMarkDown({source: file.fileText, target: null})
-    }
-
-    useEffect(() => {
-        if(markDown?.source) {
-            const result = processor.parse(markDown.source)
+        if(file.fileText) {
+            const result = processor.parse(file.fileText)
+            console.log(result)
             setSourceSegments(result.segments)
             setTargetSegments(result.segments)
             setLayoutData(result.layout)
         }
-    }, [markDown])
+    }
+
+    const setMD = (changedSegments, editableSegmentType) => {
+        try {
+            const data = {segments: changedSegments, layout: JSON.parse(JSON.stringify(layoutData))}
+            const result = processor.stringify(data)
+            setMarkDown({...markDown, [editableSegmentType]: result})
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     const onSegmentChange = (changedSegment, editableSegmentType, callback) => {
         const segmentState = editableSegmentType === 'target' ? targetSegments : sourceSegments
@@ -47,9 +55,8 @@ function App() {
                 return segment
             }
         })
-        setSegmentState((prevState) => {
-            return changedSegments
-        })
+        setSegmentState(changedSegments)
+        setMD(changedSegments, editableSegmentType)
     }
 
     return (
