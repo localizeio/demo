@@ -1,7 +1,7 @@
 import React, { useRef, useState} from 'react';
 import cl from './FileLoader.module.css';
 
-const FileLoader= ({onFileLoad}) => {
+const FileLoader= ({onFileLoad, isSaveActive, handleSaveAs}) => {
     const [fileState, setFileState] = useState(null)
 
     const fileInputRef = useRef()
@@ -35,7 +35,7 @@ const FileLoader= ({onFileLoad}) => {
     }
 
     const onSaveAs = () => {
-
+        handleSaveAs(fileState?.file?.name)
     }
 
     const onOpenFile = () => {
@@ -55,9 +55,10 @@ const FileLoader= ({onFileLoad}) => {
                 />
                 {fileState?.file?.name && <span className={cl.fileName}>{fileState?.file?.name}</span>}
             </div>
-            <div>
-                {fileState?.file?.name && <span className={cl.fileReaderButton} onClick={onSaveAs}>Save as...</span>}
-            </div>
+            {isSaveActive && <div>
+                {fileState?.file?.name &&
+                  <span className={cl.fileReaderButton} onClick={onSaveAs}>Save as...</span>}
+            </div>}
         </div>
     );
 };

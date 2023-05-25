@@ -5,7 +5,7 @@ import MdProcessor from "@localizeio/md/dist/processor";
 import FileLoader from "./components/FileLoader";
 import CheckBoxSwitch from "./components/CheckBoxSwitch";
 import MarkdownView from "./components/MarkdownView";
-
+import { saveAs } from 'save-files/dist/FileSaver';
 import './App.css';
 
 const processor =  new MdProcessor()
@@ -59,10 +59,15 @@ function App() {
         setMD(changedSegments, editableSegmentType)
     }
 
+    const handleSaveAs = (fileName) => {
+        const file = new File([markDown.target], fileName, {type: "text/plain;charset=utf-8"});
+        saveAs(file);
+    }
+
     return (
     <div className="App">
         <header className='header'>
-            <FileLoader onFileLoad={onFileLoad}/>
+            <FileLoader onFileLoad={onFileLoad} isSaveActive={!!markDown?.target} handleSaveAs={handleSaveAs}/>
             <div className='control'>
                 <div className='switch'>
                     <span className='switch__title'>Allow edit source</span>
