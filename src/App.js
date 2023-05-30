@@ -45,7 +45,7 @@ function App() {
 
     useEffect(() => {
         layoutData && setMD(targetSegments, 'target')
-    }, [layoutData])
+    }, [layoutData]) // eslint-disable-line
 
     const onSegmentChange = (changedSegment, editableSegmentType, callback) => {
         const segmentState = editableSegmentType === 'target' ? targetSegments : sourceSegments
