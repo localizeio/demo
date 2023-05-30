@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Editor} from '@localizeio/editor';
 import {testedData} from "./helpers/resultData";
 import MdProcessor from "@localizeio/md/dist/processor";
@@ -42,6 +42,10 @@ function App() {
             console.log(e)
         }
     }
+
+    useEffect(() => {
+        layoutData && setMD(targetSegments, 'target')
+    }, [layoutData])
 
     const onSegmentChange = (changedSegment, editableSegmentType, callback) => {
         const segmentState = editableSegmentType === 'target' ? targetSegments : sourceSegments
