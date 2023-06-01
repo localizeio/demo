@@ -7,8 +7,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@localizeio/editor": "^0.1.1",
-    "@localizeio/md": "^0.2.1",
+    "@localizeio/editor": "^0.1.2",
+    "@localizeio/md": "^0.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
