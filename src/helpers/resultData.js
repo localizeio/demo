@@ -145,7 +145,7 @@ const layout = {
                 {type: 'segment', id: '13'},
             ],
             properties: {},
-            tagName: 'sup',
+            tagName: 'p',
             type: 'element',
         }, {
             children: [
@@ -222,15 +222,22 @@ const layout = {
             children: [
                 {
                     children: [
-                        {type: 'segment', id: '21'}
+                        {
+                            children: [
+                                {type: 'segment', id: '21'}
+                            ],
+                            properties: {},
+                            tagName: 'code',
+                            type: 'element',
+                        }
                     ],
                     properties: {},
-                    tagName: 'p',
+                    tagName: 'pre',
                     type: 'element',
-                }
+                },
             ],
             properties: {},
-            tagName: 'code',
+            tagName: 'p',
             type: 'element',
         }, {
             children: [
@@ -474,9 +481,9 @@ const segments = [
     },
     {
         id: '7',
-        text: '{a1}Google {/a1}',
+        text: '{a0}Google {/a0}',
         attributes: {
-            a1: {
+            a0: {
                 href: "google.com"
             },
         }
@@ -495,9 +502,9 @@ const segments = [
     },
     {
         id: '11',
-        text: '{img1 alt="Citadel"}',
+        text: '{img0 alt="Citadel"}',
         attributes: {
-            img1: {
+            img0: {
                 src: "https://raw.github.com/adam-p/markdown-here/master/store-assets/dos-equis-MDH.jpg",
                 alt: "Citadel"
             }
@@ -505,21 +512,21 @@ const segments = [
     },
     {
         id: '12',
-        text: 'Other {em1}pictures {/em1}',
+        text: 'Other {em0}pictures {/em0}',
     },
     {
         id: '13',
-        text: '{em1}Tag em on sup {/em1} segment sup',
+        text: '{sup0}{em1}Tag em on sup {/em1} segment sup{/sup0}',
     },
     {
         id: '14',
-        text: '{em1}Pictures {/em1}other',
+        text: '{em0}Pictures {/em0}other',
     },
     {
         id: '15',
-        text: '{a1}See more {/a1}',
+        text: '{a0}See more {/a0}',
         attributes: {
-            a1: {href: "google.com"}
+            a0: {href: "google.com"}
         }
     },
     {
@@ -548,21 +555,21 @@ const segments = [
     },
     {
         id: '22',
-        text: 'See code {code1}there, {/code1}after code {b2}{em3}after {/em3}{/b2}',
+        text: 'See code {code0}there, {/code0}after code {b1}{em2}after {/em2}{/b1}',
     },
     {
         id: '23',
-        text: 'See {a1}link 1{/a1} then {a2}link2 {/a2}',
+        text: 'See {a0}link 1{/a0} then {a1}link2 {/a1}',
         attributes: {
-            a1: {href: "yandex.by"}, a2: {href: "onliner.by"}
+            a0: {href: "yandex.by"}, a1: {href: "onliner.by"}
         }
     },
     {
         id: '24',
-        text: '{em1}Markdown Here{/em1} verwendet {a2}Github Flavored Markdown{/a2} mit der Einschränkung, dass spezielle GFM-Links nicht unterstützt werden ( {a3}issue #11{/a3} ); sie werden es auch nicht sein, da MDH nicht Github-spezifisch ist.',
+        text: '{em0}Markdown Here{/em0} verwendet {a1}Github Flavored Markdown{/a1} mit der Einschränkung, dass spezielle GFM-Links nicht unterstützt werden ( {a2}issue #11{/a2} ); sie werden es auch nicht sein, da MDH nicht Github-spezifisch ist.',
         attributes: {
-            a2: {href: 'https://docs.github.com/en/get-started/writing-on-github'},
-            a3: {href: 'https://github.com/adam-p/markdown-here/issues/11'}
+            a1: {href: 'https://docs.github.com/en/get-started/writing-on-github'},
+            a2: {href: 'https://github.com/adam-p/markdown-here/issues/11'}
         }
     },
     {
